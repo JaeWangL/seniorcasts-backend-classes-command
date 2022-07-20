@@ -1,0 +1,110 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module",
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "jest": true,
+    "es6": true,
+    "node": true
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "unused-imports",
+    "simple-import-sort",
+    "import",
+    /**
+    "@moneteam/nestjs",
+    */
+    "jest",
+    "prettier"
+  ],
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    /**
+    "plugin:@moneteam/nestjs/recommended",
+    */
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "ignorePatterns": ["dist/**", "prisma/**"],
+  "rules": {
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "endOfLine": "auto"
+    }],
+    "class-methods-use-this": "off",
+        /**
+     * plugin:import
+     */
+     "import/prefer-default-export": "off", // Named export is easier to refactor automatically
+     "import/first": "error",
+     "import/newline-after-import": "error",
+     "import/no-duplicates": "error",
+     /**
+      * plugin:simple-import-sort
+      */
+      "simple-import-sort/imports": [
+       "error",
+       {
+         "groups": [["^\\u0000", "^@?\\w", "^[^.]", "^\\."]]
+       }
+     ],
+     "simple-import-sort/exports": "error",
+         /**
+     * plugin:typescript-eslint
+     */
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "Object": {
+            "message": "Avoid using the `Object` type. Did you mean `object`?"
+          },
+          "Function": {
+            "message": "Avoid using the `Function` type. Prefer a specific function type, like `() => void`."
+          },
+          "Boolean": {
+            "message": "Avoid using the `Boolean` type. Did you mean `boolean`?",
+            "fixWith": "boolean"
+          },
+          "Number": {
+            "message": "Avoid using the `Number` type. Did you mean `number`?",
+            "fixWith": "number"
+          },
+          "Symbol": {
+            "message": "Avoid using the `Symbol` type. Did you mean `symbol`?",
+            "fixWith": "symbol"
+          },
+          "String": {
+            "message": "Avoid using the `String` type. Did you mean `string`?",
+            "fixWith": "string"
+          },
+          "{}": {
+            "message": "Use Record<K, V> instead",
+            "fixWith": "Record<K, V>"
+          },
+          "object": {
+            "message": "Use Record<K, V> instead",
+            "fixWith": "Record<K, V>"
+          }
+        }
+      }
+    ],
+    "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
+    "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
+    "@typescript-eslint/no-non-null-assertion": "off"
+  }
+}
