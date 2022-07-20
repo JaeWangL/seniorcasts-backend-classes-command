@@ -6,14 +6,12 @@ import type { Classes, Prisma } from '@prisma/client';
 export class ClassService {
   constructor(private dbSvc: DatabaseService) {}
 
-  async findByIdAsync(classId: string): Promise<Classes | null> {
-    const tt = await this.dbSvc.classes.findUnique({
+  findByIdAsync(classId: string): Promise<Classes | null> {
+    return this.dbSvc.classes.findUnique({
       where: {
         class_id: classId,
       },
     });
-
-    return tt;
   }
 
   createAsync(data: Prisma.ClassesCreateInput): Promise<Classes> {
