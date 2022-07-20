@@ -12,7 +12,7 @@ import { MessageService } from './services/message_service';
   imports: [
     I18nModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
-        fallbackLanguage: configService.get<string>('app.language'),
+        fallbackLanguage: configService.get<string>('app.language')!,
         fallbacks: Object.values(I18nLanguages).reduce(
           (a, v) => ({ ...a, [`${v}-*`]: v }),
           {}

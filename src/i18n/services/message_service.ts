@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import type { ValidationError } from 'class-validator';
 import { isArray } from 'class-validator';
 import { I18nService } from 'nestjs-i18n';
-import type { IErrors } from 'src/utils/error/error.interface';
 import { I18nLanguages } from '../i18n_constants';
 import type {
   IMessage,
@@ -22,60 +20,7 @@ export class MessageService {
     this.defaultLanguage = this.configService.get<string>('app.language')!;
   }
 
-  getRequestErrorsMessage(
-    requestErrors: ValidationError[],
-    customLanguages?: string[]
-  ): IErrors[] {
-    const messages: Array<IErrors[]> = [];
-
-    requestErrors.forEach(async (transfomer) => {
-      let { children } = transfomer;
-      let constraints: string[] = Object.keys(transfomer.constraints || []);
-      const errors: IErrors[] = [];
-      let { property } = transfomer;
-      let propertyValue: string = transfomer.value;
-
-      if (children.length > 0) {
-        while (children.length > 0) {
-          for (const child of children) {
-            property = `${property}.${child.property}`;
-
-            if (child.children && child.children.length > 0) {
-              children = child.children;
-              break;
-            } else if (child.constraints) {
-              constraints = Object.keys(child.constraints);
-              children = [];
-              propertyValue = child.value;
-              break;
-            }
-          }
-        }
-      }
-
-      constraints.forEach(async (constraint) => {
-        errors.push({
-          property,
-          message: (await this.get(`request.${constraint}`, {
-            customLanguages,
-            properties: {
-              property,
-              value: propertyValue,
-            },
-          })) as string,
-        });
-      });
-
-      messages.push(errors);
-    });
-
-    return messages.flat(1);
-  }
-
-  async get(
-    key: string,
-    options?: IMessageOptions
-  ): Promise<string | IMessage> {
+  get(key: string, options?: IMessageOptions): string | IMessage {
     const { properties, customLanguages } = options || {
       properties: undefined,
       customLanguages: undefined,
@@ -87,11 +32,11 @@ export class MessageService {
       customLanguages.length > 0
     ) {
       const messages: IMessage = {};
-      for (const customLanguage of customLanguages) {
-        messages[customLanguage] = await this.setMessage(customLanguage, key, {
+      customLanguages.forEach((customLanguage) => {
+        messages[customLanguage] = this.setMessage(customLanguage, key, {
           properties,
         });
-      }
+      });
 
       if (Object.keys(messages).length === 1) {
         return messages[customLanguages[0]];
@@ -109,8 +54,8 @@ export class MessageService {
     lang: string,
     key: string,
     options?: IMessageSetOptions
-  ): any {
-    return this.i18n.translate(key, {
+  ): string {
+    return this.i18n.translate<string>(key, {
       lang,
       args: options && options.properties ? options.properties : undefined,
     });
