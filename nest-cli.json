@@ -1,5 +1,10 @@
 {
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
-  "entryFile": "server"
+  "entryFile": "server",
+  "compilerOptions": {
+    "assets": [
+      { "include": "i18n/languages/**/*", "watchAssets": true }
+    ]
+  }
 }
