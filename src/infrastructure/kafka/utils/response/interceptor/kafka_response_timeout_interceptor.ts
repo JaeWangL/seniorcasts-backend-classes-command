@@ -37,7 +37,6 @@ export class KafkaResponseTimeoutInterceptor
               message: 'http.clientError.requestTimeOut',
             });
           }
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           return throwError(() => err);
         })
       );

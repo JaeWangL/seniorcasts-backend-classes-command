@@ -1,0 +1,63 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Categories {
+  value String [pk]
+  categories Classes_Category [not null]
+}
+
+Table Owners {
+  id BigInt [pk, increment]
+  user_id String [unique, not null]
+  nick_name String [not null]
+  avatar_domain String [not null]
+  avatar_blob_name String [not null]
+  avatar_original_name String [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  classes Classes [not null]
+}
+
+Table Classes {
+  class_id String [pk]
+  owner_id BigInt [not null]
+  title String [not null]
+  about String [not null]
+  what_learn String [not null]
+  profile_domain String [not null]
+  profile_blob_name String [not null]
+  profile_original_name String [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  categories Classes_Category [not null]
+  sessions Classes_Sessions [not null]
+  owner Owners [not null]
+}
+
+Table Classes_Category {
+  id BigInt [pk, increment]
+  class_id String [not null]
+  category_value String [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  category Categories [not null]
+  class Classes [not null]
+}
+
+Table Classes_Sessions {
+  session_id String [pk]
+  class_id String [not null]
+  start_date DateTime [not null]
+  created_at DateTime [default: `now()`, not null]
+  updated_at DateTime [default: `now()`, not null]
+  class Classes [not null]
+}
+
+Ref: Classes.owner_id > Owners.id [delete: Cascade]
+
+Ref: Classes_Category.category_value > Categories.value [delete: Cascade]
+
+Ref: Classes_Category.class_id > Classes.class_id [delete: Cascade]
+
+Ref: Classes_Sessions.class_id > Classes.class_id [delete: Cascade]

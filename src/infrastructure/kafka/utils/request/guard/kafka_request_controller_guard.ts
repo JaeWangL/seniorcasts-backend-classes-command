@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment, no-underscore-dangle  */
+/* eslint-disable no-underscore-dangle  */
 import {
   ERROR_CLASS_META_KEY,
   ERROR_FUNCTION_META_KEY,

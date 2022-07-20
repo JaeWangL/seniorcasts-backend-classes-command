@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 import { registerAs } from '@nestjs/config';
 import bytes from 'bytes';
 import ms from 'ms';

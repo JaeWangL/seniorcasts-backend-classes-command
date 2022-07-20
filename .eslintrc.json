@@ -58,7 +58,7 @@
        }
      ],
      "simple-import-sort/exports": "error",
-         /**
+    /**
      * plugin:typescript-eslint
      */
     "no-unused-vars": "off",
@@ -105,6 +105,14 @@
     ],
     "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
     "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    /**
+    * eslint: recommended-requiring-type-checking
+    */
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-return": "off"
   }
 }

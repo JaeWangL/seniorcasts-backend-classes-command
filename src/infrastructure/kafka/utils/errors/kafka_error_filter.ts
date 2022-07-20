@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/naming-convention, @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { LoggingService } from '@infrastructure/logging/services/logging_service';
 import type { ArgumentsHost, ExceptionFilter } from '@nestjs/common';
 import { Catch } from '@nestjs/common';
