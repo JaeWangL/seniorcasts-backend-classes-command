@@ -20,7 +20,7 @@ Table Owners {
 }
 
 Table Classes {
-  class_id String [pk]
+  id String [pk]
   owner_id BigInt [not null]
   title String [not null]
   about String [not null]
@@ -46,7 +46,7 @@ Table Classes_Category {
 }
 
 Table Classes_Sessions {
-  session_id String [pk]
+  id String [pk]
   class_id String [not null]
   start_date DateTime [not null]
   created_at DateTime [default: `now()`, not null]
@@ -58,6 +58,6 @@ Ref: Classes.owner_id > Owners.id [delete: Cascade]
 
 Ref: Classes_Category.category_value > Categories.value [delete: Cascade]
 
-Ref: Classes_Category.class_id > Classes.class_id [delete: Cascade]
+Ref: Classes_Category.class_id > Classes.id [delete: Cascade]
 
-Ref: Classes_Sessions.class_id > Classes.class_id [delete: Cascade]
+Ref: Classes_Sessions.class_id > Classes.id [delete: Cascade]

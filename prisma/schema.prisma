@@ -22,21 +22,19 @@ model Owners {
   nick_name                    String      @db.VarChar(255)
   avatar_domain                String      @db.VarChar(255)
   avatar_blob_name             String      @db.VarChar(255)
-  avatar_original_name         String      @db.VarChar(255)
   created_at                   DateTime    @db.Timestamptz() @default(now())
   updated_at                   DateTime    @db.Timestamptz() @default(now())
   classes                      Classes[]
 }
 
 model Classes {
-  class_id                      String                @id @db.VarChar(255)
+  id                            String                @id @db.VarChar(255)
   owner_id                      BigInt
   title                         String                @db.VarChar(255)
   about                         String                @db.Text
   what_learn                    String                @db.Text
   profile_domain                String                @db.VarChar(255)
   profile_blob_name             String                @db.VarChar(255)
-  profile_original_name         String                @db.VarChar(255)
   created_at                    DateTime              @db.Timestamptz() @default(now())
   updated_at                    DateTime              @db.Timestamptz() @default(now())
   categories                    Classes_Category[]
@@ -51,14 +49,14 @@ model Classes_Category {
   created_at          DateTime        @db.Timestamptz() @default(now())
   updated_at          DateTime        @db.Timestamptz() @default(now())
   category            Categories      @relation(fields: [category_value], references: [value], onDelete: Cascade)
-  class               Classes         @relation(fields: [class_id], references: [class_id], onDelete: Cascade)
+  class               Classes         @relation(fields: [class_id], references: [id], onDelete: Cascade)
 }
 
 model Classes_Sessions {
-  session_id                    String       @id @db.VarChar(255)
-  class_id                      String       @db.VarChar(255)
-  start_date                    DateTime     @db.Timestamptz()
-  created_at                    DateTime     @db.Timestamptz() @default(now())
-  updated_at                    DateTime     @db.Timestamptz() @default(now())
-  class                         Classes      @relation(fields: [class_id], references: [class_id], onDelete: Cascade)
+  id                    String       @id @db.VarChar(255)
+  class_id              String       @db.VarChar(255)
+  start_date            DateTime     @db.Timestamptz()
+  created_at            DateTime     @db.Timestamptz() @default(now())
+  updated_at            DateTime     @db.Timestamptz() @default(now())
+  class                 Classes      @relation(fields: [class_id], references: [id], onDelete: Cascade)
 }
