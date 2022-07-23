@@ -33,6 +33,8 @@
   },
   "dependencies": {
     "@devoxa/prisma-relay-cursor-connection": "^2.2.2",
+    "@fastify/compress": "^6.1.0",
+    "@fastify/helmet": "^9.1.0",
     "@moneteam/eslint-plugin-nestjs": "^1.6.0",
     "@nestjs/common": "^9.0.3",
     "@nestjs/config": "^2.2.0",
@@ -50,13 +52,11 @@
     "kafkajs": "^2.1.0",
     "ksuid": "^3.0.0",
     "ms": "^2.1.3",
-    "nest-winston": "^1.7.0",
     "nestjs-i18n": "^9.1.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.6",
-    "ulidx": "^0.3.0",
-    "winston": "^3.8.1"
+    "ulidx": "^0.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

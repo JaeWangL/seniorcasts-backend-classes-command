@@ -106,6 +106,7 @@
     "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
     "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
     "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     /**
     * eslint: recommended-requiring-type-checking
     */

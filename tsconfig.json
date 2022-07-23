@@ -21,6 +21,7 @@
     "strictPropertyInitialization": false,
     "paths": {
       "@application/*": ["./src/application/*"],
+      "@classes/*": ["./src/application/classes/*"],
       "@i18n/*": ["./src/i18n/*"],
       "@infrastructure/*": ["./src/infrastructure/*"],
       "@shared/*": ["./src/shared/*"]

@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { ClientKafka } from '@nestjs/microservices';
 import { firstValueFrom, lastValueFrom, timeout } from 'rxjs';
 import { ulid } from 'ulidx';
-import { KafkaTopics } from '../../kafka_constants';
+import { type KafkaTopicDataTypes, KafkaTopics } from '../../kafka_constants';
 import { KAFKA_PRODUCER_SERVICE_NAME } from '../kafka_producer_constants';
 import type {
   IKafkaMessage,
@@ -38,13 +38,14 @@ export class KafkaProducerService implements OnApplicationBootstrap {
     this.logger.log('Kafka Client Connected');
   }
 
-  async send<T, N>(
-    topic: string,
-    data: T,
+  async send<T extends KafkaTopics, N>(
+    topic: T,
+    data: KafkaTopicDataTypes[T],
     options?: IKafkaProducerSendMessageOptions
   ): Promise<IKafkaMessage<N> | N> {
     const message: IKafkaMessage<T> = {
       key: ulid(),
+      // @ts-ignore
       value: data,
       headers: options && options.headers ? options.headers : undefined,
     };
@@ -66,13 +67,14 @@ export class KafkaProducerService implements OnApplicationBootstrap {
     return options && options.raw ? response : response.value;
   }
 
-  emit<T>(
-    topic: string,
-    data: T,
+  emit<T extends KafkaTopics>(
+    topic: T,
+    data: KafkaTopicDataTypes[T],
     options?: IKafkaProducerMessageOptions
   ): void {
     const message: IKafkaMessage<T> = {
       key: ulid(),
+      // @ts-ignore
       value: data,
       headers: options && options.headers ? options.headers : undefined,
     };

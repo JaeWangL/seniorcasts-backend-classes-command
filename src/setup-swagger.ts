@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication): void {
   const documentBuilder = new DocumentBuilder()
-    .setTitle('API')
+    .setTitle('Seniorcasts Classes-Command API')
     .setDescription(
       `### REST
 Routes is following REST standard (Richardson level 3)

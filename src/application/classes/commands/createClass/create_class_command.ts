@@ -1,20 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { DescriptionModel } from '@shared/models/description_model';
-import { SessionModel } from '@shared/models/session_model';
+import type { DecodedUser } from '@infrastructure/identity/identity_interfaces';
+import type { CreateClassBody } from '../../dtos/requests/create_class';
 
 export class CreateClassCommand {
-  @ApiProperty({ maxLength: 50 })
-  readonly title: string;
-
-  @ApiProperty()
-  readonly description: DescriptionModel;
-
-  @ApiProperty()
-  readonly profileUrl: string;
-
-  @ApiProperty()
-  readonly categoryValues: string[];
-
-  @ApiProperty()
-  readonly firstSession: SessionModel;
+  constructor(readonly user: DecodedUser, readonly body: CreateClassBody) {}
 }

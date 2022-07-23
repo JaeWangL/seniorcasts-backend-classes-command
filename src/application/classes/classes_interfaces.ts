@@ -1,3 +1,5 @@
-export interface ClassesSearchFilter {
-  title?: string;
+export interface ClassesRelationInclude {
+  includeCategories?: boolean;
+  includeOwner?: boolean;
+  includeSessions?: boolean;
 }
