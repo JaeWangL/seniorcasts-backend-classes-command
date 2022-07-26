@@ -1,3 +1,4 @@
+import { DatabaseService } from '@infrastructure/database/services/database_service';
 import { Logger, VERSION_NEUTRAL, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -46,6 +47,10 @@ async function bootstrap() {
       prefix: versioningPrefix,
     });
   }
+
+  // Database
+  const databaseSvc = app.get(DatabaseService);
+  databaseSvc.enableShutdownHooks(app);
 
   // Set middlewares
   await setupMiddlewaresAsync(app);
