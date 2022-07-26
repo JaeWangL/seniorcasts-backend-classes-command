@@ -121,12 +121,6 @@ async function bootstrap() {
     'NestApplication'
   );
   logger.log(`App Timezone is ${tz}`, 'NestApplication');
-  logger.log(
-    `Database Debug is ${configService
-      .get<boolean>('database.debug')!
-      .toString()}`,
-    'NestApplication'
-  );
 
   logger.log(`==========================================================`);
 
